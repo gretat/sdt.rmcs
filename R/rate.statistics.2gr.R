@@ -44,7 +44,7 @@
 #'                  falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2,
 #'                  falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
 #'
-#'@importFrom tidyr gather
+#'@importFrom tidyverse gather
 #'
 #'
 rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, hits2 = hits2, miss2 = miss2,
