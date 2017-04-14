@@ -1,4 +1,4 @@
-# signal.detection
+# Overview
 ### Signal Detection Analysis with simulated data, or with data input for 1 or 2 groups
 
 This package, allows running the basic signal detection analysis, 
