@@ -12,19 +12,20 @@
 #' @param min.cr2 A number - Minimum ammount of correct rejections for group 2.  Dafalt to 0.3
 #'
 #'@return
-#'A data table with the following columns
-#'\itme{hits}{total number of hits per participant randomly chosen between tot.signal and the minimum proportion hits specified}
-#'\itme{corRej}{total number of correct rejection per participant randomly chosen between tot.lure and the minimum proportion critical rejections specified}
-#'\itme{miss}{total number of misses per participant - left from the total signals after removing hits}
-#'\itme{falarm}{total number of false alarms per participant - left from the total lures after removing correct rejections}
-#'\itme{hits2}{total number of hits per participant for group 2 randomly chosen between tot.signal and the minimum proportion hits specified}
-#'\itme{corRej2}{total number of correct rejection per participant for group 2 randomly chosen between tot.lure and the minimum proportion critical rejections specified}
-#'\itme{miss2}{total number of misses per participant for group 2- left from the total signals after removing hits}
-#'\itme{falarm2}{total number of false alarms per participant for group 2 - left from the total lures after removing correct rejections}
+#'    A data table with the following columns
+#'    \item{hits}{total number of hits per participant randomly chosen between tot.signal and the minimum proportion hits specified}
+#'    \item{corRej}{total number of correct rejection per participant randomly chosen between tot.lure and the minimum proportion critical rejections specified}
+#'    \item{miss}{total number of misses per participant - left from the total signals after removing hits}
+#'    \item{falarm}{total number of false alarms per participant - left from the total lures after removing correct rejections}
+#'    \item{hits2}{total number of hits per participant for group 2 randomly chosen between tot.signal and the minimum proportion hits specified}
+#'    \item{corRej2}{total number of correct rejection per participant for group 2 randomly chosen between tot.lure and the minimum proportion critical rejections specified}
+#'    \item{miss2}{total number of misses per participant for group 2- left from the total signals after removing hits}
+#'    \item{falarm2}{total number of false alarms per participant for group 2 - left from the total lures after removing correct rejections}
 #'@examples
-#' sdt.data2(tot.signal = 85, tot.lure = 100,
-#'           min.hits = 0.7, min.cr = 0.8,
-#'           min.hits2 = 0.3, min.cr2 = 0.3)
+#'     sdt.data2()
+#'     sdt.data2(tot.signal = 100, tot.lure = 50,
+#'           min.hits = 0.45, min.cr = 0.3,
+#'           min.hits2 = 0.2, min.cr2 = 0.9)
 
 sdt.data2 <- function(tot.signal = 85, tot.lure = 100, min.hits = 0.7, min.cr = 0.8,
                       min.hits2 = 0.3, min.cr2 = 0.3){

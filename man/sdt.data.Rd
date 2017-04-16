@@ -11,15 +11,24 @@ sdt.data(tot.signal = 85, tot.lure = 100, min.hits = 0.5, min.cr = 0.6)
 
 \item{tot.lure}{A number - The total number of lures i.e. number green dots that should not be responded to, Default = 100}
 
-\item{min.hits}{A number - Minimum ammount of hits. Dafalt to 0.5}
+\item{min.hits}{A number - Minimum proportion of hits. Dafalt to 0.5}
 
-\item{min.cr}{A number - Minimum ammount of correct rejections.  Dafalt to 0.6}
+\item{min.cr}{A number - Minimum proportion of correct rejections.  Dafalt to 0.6}
+}
+\value{
+A data table with the following columns
+   \item{hits}{total number of hits per participant randomly chosen between tot.signal and the minimum proportion hits specified}
+   \item{corRej}{total number of correct rejection per participant randomly chosen between tot.lure and the minimum proportion critical rejections specified}
+   \item{miss}{total number of misses per participant - left from the total signals after removing hits}
+   \item{falarm}{total number of false alarms per participant - left from the total lures after removing correct rejections}
 }
 \description{
-This creates a dataset with 1000 participants to be used with the main function \code{\link{rate.statistics}}.
+Creates a dataset with 1000 participants to be used with the main function \code{\link{rate.statistics}}.
+The parameters can be changed or it can be ran with the defaults by calling sdt.data()
 }
 \examples{
-\dontrun{
-sdt.data(tot.signal = 85, tot.lure = 100, min.hits = 0.5, min.cr = 0.6)
-}
+   sdt.data()
+
+   sdt.data(tot.signal = 15, tot.lure = 150, min.hits = 0.8, min.cr = 0.5)
+
 }
