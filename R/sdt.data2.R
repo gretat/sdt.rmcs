@@ -1,7 +1,7 @@
 #' Create data for 2 samples/groups
 #'
 #' This creates a dataset with 1000 participants to be used with the main function.
-#' \code{\link{rate.statistics2}}
+#' \code{\link{rate.statistics2}}. It can be run with its defaults sdt.rmcs() or by specifying parameters.
 #'
 #'
 #' @param tot.signal A number - The total number of signals i.e. blue dots that have to be detected Default = 85
@@ -11,12 +11,20 @@
 #' @param min.hits2 A number - Minimum ammount of hits for group 2. Dafalt to 0.3
 #' @param min.cr2 A number - Minimum ammount of correct rejections for group 2.  Dafalt to 0.3
 #'
+#'@return
+#'A data table with the following columns
+#'\itme{hits}{total number of hits per participant randomly chosen between tot.signal and the minimum proportion hits specified}
+#'\itme{corRej}{total number of correct rejection per participant randomly chosen between tot.lure and the minimum proportion critical rejections specified}
+#'\itme{miss}{total number of misses per participant - left from the total signals after removing hits}
+#'\itme{falarm}{total number of false alarms per participant - left from the total lures after removing correct rejections}
+#'\itme{hits2}{total number of hits per participant for group 2 randomly chosen between tot.signal and the minimum proportion hits specified}
+#'\itme{corRej2}{total number of correct rejection per participant for group 2 randomly chosen between tot.lure and the minimum proportion critical rejections specified}
+#'\itme{miss2}{total number of misses per participant for group 2- left from the total signals after removing hits}
+#'\itme{falarm2}{total number of false alarms per participant for group 2 - left from the total lures after removing correct rejections}
 #'@examples
-#' \dontrun{
 #' sdt.data2(tot.signal = 85, tot.lure = 100,
 #'           min.hits = 0.7, min.cr = 0.8,
 #'           min.hits2 = 0.3, min.cr2 = 0.3)
-#' }
 
 sdt.data2 <- function(tot.signal = 85, tot.lure = 100, min.hits = 0.7, min.cr = 0.8,
                       min.hits2 = 0.3, min.cr2 = 0.3){
