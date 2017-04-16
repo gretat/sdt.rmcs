@@ -23,12 +23,12 @@
 #' which are created for the recalculation of Hit rates and False alarm rates
 #' that are equal to 1 or 0
 #'
-#' @param x  Data frame Must be in summary form (i.e. each row is a participant
+#' @param x  Data frame - Must be in summary form (i.e. each row is a participant
 #' with columns: total hits per person, total false alarms per person, total correct
 #' rejections and total misses)
 #'
 #'
-#' @return a list consisting of
+#' @return
 #' \item{statistics}{A simple table containing the average d'prime and bias as well as their sd}
 #' \item{boxes}{Boxplots depicting the distribution of the d'prime and bias for each group}
 #' \item{Density}{The density distributions for signal and noise for both groups}
@@ -39,19 +39,11 @@
 #' \item{Group2}{Data frame with transformations and calculations for Group 2}
 #'
 #' @example
-<<<<<<< HEAD:R/rate.statistics2.R
-#'rate.statistics2(hits = HIT, miss = Miss, CorRej = CR, falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2, falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
-#'@export
-=======
-#'
 #' rate.statistics2(hits = HIT, miss = Miss, CorRej = CR,
 #'                  falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2,
 #'                  falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
-#'
-#'@importFrom tidyverse gather
-#'
-#'
->>>>>>> 2f65412ff678a22c7dde12c6f6593487c240e9fa:R/rate.statistics.2gr.R
+#' @export
+
 rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, hits2 = hits2, miss2 = miss2,
                              CorRej2 = CorRej2, falarm2 = falarm2, x = NULL, rm.intermid = TRUE){
 

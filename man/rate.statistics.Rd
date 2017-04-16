@@ -16,7 +16,7 @@ rate.statistics(hits = hits, miss = miss, CorRej = CorRej,
 
 \item{falarm}{column containing total dalse alarms per person}
 
-\item{x}{Data frame must be in summary form (i.e. each row is a participant
+\item{x}{Data frame - Must be in summary form (i.e. each row is a participant
 with columns: total hits per person, total false alarms per person, total correct rejections and
 total misses)}
 
@@ -25,7 +25,6 @@ the intermediate columns created for the calculation of the Hit rate and False A
 which are created for the recalculation of Hit rates and False alarm rates that are equal to 1 or 0}
 }
 \value{
-a ist consisting of
 \item{statistics}{A simple table containing the average d'prime and bias as well as their sd}
 \item{boxes}{Boxplots depicting the distribution of the d'prime and bias}
 \item{Density}{The density distributions for signal and noise}
