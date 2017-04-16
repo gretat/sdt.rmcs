@@ -10,7 +10,7 @@ Depends: R (>= 3.3.1)
 Imports: 
     dplyr, 
     flux, 
-    tidyverse, 
+    tidyr, 
     stats, 
     graphics, 
     grDevices
