@@ -1,3 +1,6 @@
 exportPattern("^[[:alpha:]]+")
 
-importFrom(tidyr,gather)
+export(sdt.data)
+export(sdt.data2)
+export(rate.statistics)
+export(rate.statistics2)

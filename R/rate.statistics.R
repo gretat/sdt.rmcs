@@ -30,11 +30,9 @@
 #' \item{data}{Data frame with transformations and calculations}
 #'
 #'
-#' @example
-#'
-#' rate.statistics(hits = HIT, miss = Miss, CorRej = CR,
-#'                 falarm = FA, sdt = data, rm.intermid = FALSE)
-#'@importFrom tidyr gather
+#'@example
+#'rate.statistics(hits = HIT, miss = Miss, CorRej = CR, falarm = FA, sdt = data, rm.intermid = FALSE)
+#'@export
 
 rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, x = NULL, rm.intermid = TRUE){
 
@@ -112,23 +110,23 @@ rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = 
               round(avg.bias, digits = 2), " (SD=",
               round(sd.bias, digits = 2), ")."))
 
-  #' Visualise the distributions of d'Prime and Bias
-  #'
+  # Visualise the distributions of d'Prime and Bias
+  #
 
-  boxes <- data.frame(gather(dat, 'Statistic', 'value', c(dPrime, Bias)))
+  boxes <- data.frame(tidyr::gather(dat, 'Statistic', 'value', c(dPrime, Bias)))
 
 
   graphics::boxplot(boxes$value ~ boxes$Statistic, col = c('salmon', 'turquoise3'),
                     main = 'Distributions of d\' and Bias(c)', outcol = "slateblue3")
 
   box.plot <- grDevices::recordPlot()
-  graphics::plot.new()
+
 
   rm(boxes)
 
   sequence <- seq(-5, 10, length = 1000)
 
-  #' Density Curve
+  # Density Curve
 
   # get normal probability density functions
   dFAR <- stats::dnorm(sequence,mean=0,sd=1)
@@ -146,10 +144,10 @@ rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = 
   graphics::par(new = F)
 
   dens <- grDevices::recordPlot()
-  graphics::plot.new()
 
 
-  #' ROC curve
+
+  # ROC curve
 
   # get response probabilities for each distribution
   pFAR <- 1 - stats::pnorm(sequence, mean = 0, sd = 1)
@@ -170,7 +168,7 @@ rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = 
   roc.curve <- grDevices::recordPlot()
 
 
-  #' AUC calculation, imports flux::auc
+  # AUC calculation, imports flux::auc
 
   AUC <- round(flux::auc(x = pFAR, y = pHR, thresh = 0.001), digits = 2)
 

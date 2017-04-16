@@ -39,14 +39,8 @@
 #' \item{Group2}{Data frame with transformations and calculations for Group 2}
 #'
 #' @example
-#'
-#' rate.statistics2(hits = HIT, miss = Miss, CorRej = CR,
-#'                  falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2,
-#'                  falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
-#'
-#'@importFrom tidyr gather
-#'
-#'
+#'rate.statistics2(hits = HIT, miss = Miss, CorRej = CR, falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2, falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
+#'@export
 rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, hits2 = hits2, miss2 = miss2,
                              CorRej2 = CorRej2, falarm2 = falarm2, x = NULL, rm.intermid = TRUE){
 
@@ -166,31 +160,27 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
               round(avg.bias2, digits = 2), " (SD=",
               round(sd.bias2, digits = 2), ")."))
 
-  #' Visualise the distributions of d'Prime and Bias
-  #'
+  # Visualise the distributions of d'Prime and Bias
+  #
 
-  boxes <- data.frame(gather(dat, 'Statistic', 'value', c(dPrime, Bias)))
-  boxes2 <- data.frame(gather(dat2, 'Statistic2', 'value2', c(dPrime2, Bias2)))
+  boxes <- data.frame(tidyr::gather(dat, 'Statistic', 'value', c(dPrime, Bias)))
+  boxes2 <- data.frame(tidyr::gather(dat2, 'Statistic2', 'value2', c(dPrime2, Bias2)))
 
-  old.par <- graphics::par(mfrow=c(1, 2))
+
 
   graphics::boxplot(boxes$value ~ boxes$Statistic, col = c('salmon', 'turquoise3'),
                     main = 'Distributions for group 1', outcol="slateblue3")
+  box.plot1 <- grDevices::recordPlot()
+
   graphics::boxplot(boxes2$value2 ~ boxes2$Statistic2,  names = c('Bias', 'dPrime'), col = c('salmon', 'turquoise3'),
                     main = 'Distributions for group 2', outcol = "slateblue3")
-  graphics::par(old.par)
-
-  box.plot <- grDevices::recordPlot()
-
-  graphics::par()
+  box.plot2 <- grDevices::recordPlot()
   graphics::plot.new()
-
-
   rm(boxes, boxes2)
 
   sequence <- seq(-5, 10, length = 1000)
 
-  #' Density Curve
+  # Density Curve
 
   # get normal probability density functions group 1
   dFAR <- stats::dnorm(sequence,mean=0,sd=1)
@@ -200,7 +190,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   dHR2 <- stats::dnorm(sequence,mean=avg.dprime2,sd=sd.dprime2) # sd=1 for equal variance SD
 
   # draw the density function + line for criterion
-  old.par2 <- graphics::par(mfcol=c(2, 1))
+
 
   graphics::plot(sequence, dFAR, type = "l", col = 'turquoise3', xlab = "", ylab = "",
                  ylim = c(0, .5), lwd = 2, main = 'Group 1') # FAR distribution
@@ -211,6 +201,8 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   graphics::legend("topright", legend = c("Noise", "Signal+Noise"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
   graphics::par(new = F)
 
+  dens1 <- grDevices::recordPlot()
+
   graphics::plot(sequence, dFAR2, type = "l", col = 'turquoise3', xlab = "", ylab = "",
                  ylim = c(0, .5), lwd = 2, main = 'Group 2') # FAR2 distribution
   graphics::par(new = T)
@@ -219,13 +211,12 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   graphics::abline(v = avg.bias2, lty = 3, lwd = 3) # dotted line for criterion
   graphics::legend("topright", legend = c("Noise", "Signal+Noise"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
   graphics::par(new = F)
-  graphics::par(old.par2)
 
-  dens <- grDevices::recordPlot()
-  graphics::par()
+
+  dens2 <- grDevices::recordPlot()
   graphics::plot.new()
 
-  #' ROC curve
+  # ROC curve
 
   # get response probabilities for each distribution group 1
   pFAR <- 1 - stats::pnorm(sequence, mean = 0, sd = 1)
@@ -260,7 +251,8 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   roc.curve <- grDevices::recordPlot()
   graphics::par()
 
-  #' AUC calculation, imports flux::auc
+
+  # AUC calculation, imports flux::auc
 
   AUC <- round(flux::auc(x = pFAR, y = pHR, thresh = 0.001), digits = 2)
   AUC2 <- round(flux::auc(x = pFAR2, y = pHR2, thresh = 0.001), digits = 2)
@@ -272,7 +264,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
               round(avg.dprime2, digits = 2), ' is: ',
               AUC2))
 
-  params <- list('statistics' = sdt.stat, 'boxes' = box.plot, 'Density' = dens, 'ROC' = roc.curve,
+  params <- list('statistics' = sdt.stat, 'boxes1' = box.plot1, 'boxes2' = box.plot2, 'Density1' = dens1, 'Density2' = dens2, 'ROC' = roc.curve,
                  'AUC' = AUC, 'AUC2' = AUC2, 'Group1' = dat, 'Group2' = dat2)
 
   return(params)
