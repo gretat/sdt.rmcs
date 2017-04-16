@@ -39,8 +39,19 @@
 #' \item{Group2}{Data frame with transformations and calculations for Group 2}
 #'
 #' @example
+<<<<<<< HEAD:R/rate.statistics2.R
 #'rate.statistics2(hits = HIT, miss = Miss, CorRej = CR, falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2, falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
 #'@export
+=======
+#'
+#' rate.statistics2(hits = HIT, miss = Miss, CorRej = CR,
+#'                  falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2,
+#'                  falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
+#'
+#'@importFrom tidyverse gather
+#'
+#'
+>>>>>>> 2f65412ff678a22c7dde12c6f6593487c240e9fa:R/rate.statistics.2gr.R
 rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, hits2 = hits2, miss2 = miss2,
                              CorRej2 = CorRej2, falarm2 = falarm2, x = NULL, rm.intermid = TRUE){
 

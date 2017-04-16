@@ -30,9 +30,17 @@
 #' \item{data}{Data frame with transformations and calculations}
 #'
 #'
+<<<<<<< HEAD
 #'@example
 #'rate.statistics(hits = HIT, miss = Miss, CorRej = CR, falarm = FA, sdt = data, rm.intermid = FALSE)
 #'@export
+=======
+#' @example
+#'
+#' rate.statistics(hits = HIT, miss = Miss, CorRej = CR,
+#'                 falarm = FA, sdt = data, rm.intermid = FALSE)
+#'@importFrom tidyverse gather
+>>>>>>> 2f65412ff678a22c7dde12c6f6593487c240e9fa
 
 rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, x = NULL, rm.intermid = TRUE){
 
