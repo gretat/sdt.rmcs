@@ -211,7 +211,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   graphics::plot(sequence, dHR, type = "l", col = 'salmon', axes = F, xlab = "x",
                  ylab = "Normal probability density function", ylim = c(0, .5), lwd = 2, main = 'Group 1') # HR distribution
   graphics::abline(v = avg.bias, lty = 3, lwd = 3) # dotted line for criterion
-  graphics::legend("topright", legend = c("Noise", "Signal"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
+  graphics::legend("topright", legend = c("Noise", "Signal", "Criterion"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
   graphics::par(new = F)
 
   dens1 <- grDevices::recordPlot()
@@ -222,7 +222,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   graphics::plot(sequence, dHR2, type = "l", col = 'salmon', axes = F, xlab = "x",
                  ylab = "Normal probability density function 2", ylim = c(0, .5), lwd = 2, main = 'Group 2') # HR2 distribution
   graphics::abline(v = avg.bias2, lty = 3, lwd = 3) # dotted line for criterion
-  graphics::legend("topright", legend = c("Noise", "Signal"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
+  graphics::legend("topright", legend = c("Noise", "Signal", "Criterion"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
   graphics::par(new = F)
 
 
