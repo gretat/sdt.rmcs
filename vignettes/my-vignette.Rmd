@@ -72,7 +72,7 @@ participants had minimum chance level performance - thus the minimum proportion 
 ```{r}
 
 mydata <- sdt.data(tot.signal = 30, tot.lure = 50, min.hits = 0.5, min.cr = 0.8)
-tibble::glimpse(mydata, width = 50)
+head(mydata, 5)
 ```
 
 
@@ -103,7 +103,6 @@ The function will produce verbatim output that gives a small summary of the calc
 
 
 ```{r, fig.show='hide', fig.width=9, fig.height=5}
-
 my.analysis <- rate.statistics(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, x = mydata, rm.intermid = FALSE)
 ```
 
@@ -133,7 +132,7 @@ It produces density plots for the signal and noise distributions where the signa
 
 
 
-```{r, fig.show='asis', fig.width=7, fig.height=5}
+```{r, fig.show='asis', fig.width=9, fig.height=5}
 my.analysis$Density
 ```
 
@@ -170,7 +169,7 @@ Finally the newly created data set with all the calculations is saved. As the in
 
 
 ```{r}
-tibble::glimpse(my.analysis$data)
+head(my.analysis$data, 5)
 ```
 
 
@@ -197,7 +196,7 @@ participants in group 1 had a very good performance - thus the minimum proportio
 mydata2 <- sdt.data2(tot.signal = 80, tot.lure = 80,
            min.hits = 0.8, min.cr = 0.85,
            min.hits2 = 0.2, min.cr2 = 0.4)
-tibble::glimpse(mydata2, width = 50)
+head(mydata2, 5)
 ```
 
 
@@ -260,7 +259,7 @@ It produces 2 separate density plots for each group for the signal and noise dis
 
 
 
-```{r, fig.show='asis', fig.width=7, fig.height=5}
+```{r, fig.show='asis', fig.width=9, fig.height=5}
 
 my.analysis2$Density1
 my.analysis2$Density2
@@ -272,7 +271,7 @@ It additionally produces an ROC plot, which includes the ROC curves and the crit
 
 
 
-```{r, fig.show='asis', fig.width=7, fig.height=5}
+```{r, fig.show='asis', fig.width=9, fig.height=5}
 my.analysis2$ROC
 ```
 
@@ -282,7 +281,7 @@ Based on the normal distributions creates to crest the ROC curve, the areas unde
 
 
 
-#### NOTE
+
 #### NOTE
 It is important to note that small or big SD for the d'Prime will have an effect on the signal distribution, which will be seen in the 
 density functions. Those will have an effect on the ROC curve and might have an effect  on the AUC calculation. If too big violations are 
@@ -302,13 +301,13 @@ Finally the newly created data sets with all the calculations are saved in two d
 ####Group 1
 
 ```{r}
-tibble::glimpse(my.analysis2$Group1)
+head(my.analysis2$Group1, 5)
 ```
 
 
 ####Group 2
 ```{r}
-tibble::glimpse(my.analysis2$Group2)
+head(my.analysis2$Group1, 5)
 ```
 
 
