@@ -36,10 +36,12 @@ that are equal to 1 or 0}
 }
 \value{
 \item{statistics}{A simple table containing the average d'prime and bias as well as their sd}
-    \item{boxes}{Boxplots depicting the distribution of the d'prime and bias for each group}
-    \item{Density}{The density distributions for signal and noise for both groups}
+    \item{boxes1}{Boxplots depicting the distribution of the d'prime and bias for group 1}
+    \item{boxes2}{Boxplots depicting the distribution of the d'prime and bias for group 2}
+    \item{Density1}{The density distributions for signal and noise for group 1}
+    \item{Density1}{The density distributions for signal and noise for group 2}
     \item{ROC}{An ROC curve for both groups, including a dot for the position of the criterion}
-    \item{AUC}{Area under the curve for Group 1}
+    \item{AUC1}{Area under the curve for Group 1}
     \item{AUC2}{Area under the curve for Group 2}
     \item{Group1}{Data frame with transformations and calculations for Group 1}
     \item{Group2}{Data frame with transformations and calculations for Group 2}
@@ -60,7 +62,7 @@ Calculates hit rate, false alarm rate, Miss rate and Correct rejection rate,
 \examples{
     rate.statistics2()
 
-    data <- sdt.data2(60, 150, 0.3, 0.8)
+    data <- sdt.data2(60, 150, 0.3, 0.8, 0.5, 0.7)
     result <- rate.statistics2(x = data, rm.intermid = FALSE)
     result$Density2
 \dontrun{

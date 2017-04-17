@@ -32,10 +32,12 @@
 #'
 #' @return
 #'     \item{statistics}{A simple table containing the average d'prime and bias as well as their sd}
-#'     \item{boxes}{Boxplots depicting the distribution of the d'prime and bias for each group}
-#'     \item{Density}{The density distributions for signal and noise for both groups}
+#'     \item{boxes1}{Boxplots depicting the distribution of the d'prime and bias for group 1}
+#'     \item{boxes2}{Boxplots depicting the distribution of the d'prime and bias for group 2}
+#'     \item{Density1}{The density distributions for signal and noise for group 1}
+#'     \item{Density1}{The density distributions for signal and noise for group 2}
 #'     \item{ROC}{An ROC curve for both groups, including a dot for the position of the criterion}
-#'     \item{AUC}{Area under the curve for Group 1}
+#'     \item{AUC1}{Area under the curve for Group 1}
 #'     \item{AUC2}{Area under the curve for Group 2}
 #'     \item{Group1}{Data frame with transformations and calculations for Group 1}
 #'     \item{Group2}{Data frame with transformations and calculations for Group 2}
@@ -43,7 +45,7 @@
 #' @examples
 #'     rate.statistics2()
 #'
-#'     data <- sdt.data2(60, 150, 0.3, 0.8)
+#'     data <- sdt.data2(60, 150, 0.3, 0.8, 0.5, 0.7)
 #'     result <- rate.statistics2(x = data, rm.intermid = FALSE)
 #'     result$Density2
 #'\dontrun{
@@ -165,8 +167,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
               round(avg.dprime, digits = 2), "(SD=",
               round(sd.dprime, digits = 2),") and the Criterion (c) is at: ",
               round(avg.bias, digits = 2), " (SD=",
-              round(sd.bias, digits = 2), ").
-              The average d Prime (d') score for group 2 is: ",
+              round(sd.bias, digits = 2), ").The average d Prime (d') score for group 2 is: ",
               round(avg.dprime2, digits = 2), "(SD=",
               round(sd.dprime2, digits = 2),") and the Criterion (c) is at: ",
               round(avg.bias2, digits = 2), " (SD=",
@@ -210,7 +211,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   graphics::plot(sequence, dHR, type = "l", col = 'salmon', axes = F, xlab = "x",
                  ylab = "Normal probability density function", ylim = c(0, .5), lwd = 2, main = 'Group 1') # HR distribution
   graphics::abline(v = avg.bias, lty = 3, lwd = 3) # dotted line for criterion
-  graphics::legend("topright", legend = c("Noise", "Signal+Noise"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
+  graphics::legend("topright", legend = c("Noise", "Signal"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
   graphics::par(new = F)
 
   dens1 <- grDevices::recordPlot()
@@ -221,7 +222,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
   graphics::plot(sequence, dHR2, type = "l", col = 'salmon', axes = F, xlab = "x",
                  ylab = "Normal probability density function 2", ylim = c(0, .5), lwd = 2, main = 'Group 2') # HR2 distribution
   graphics::abline(v = avg.bias2, lty = 3, lwd = 3) # dotted line for criterion
-  graphics::legend("topright", legend = c("Noise", "Signal+Noise"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
+  graphics::legend("topright", legend = c("Noise", "Signal"), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
   graphics::par(new = F)
 
 
@@ -258,6 +259,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
                  axes = F, xlab = "", ylab = "")
   graphics::par(new = T)
   graphics::abline(a = 0, b = 1,lty = 3)
+  graphics::legend("bottomright", legend = c("Group1", "Group2"), fill = c('dodgerblue4', 'deeppink'))
   graphics::par(new=F)
 
   roc.curve <- grDevices::recordPlot()
@@ -277,7 +279,7 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
               AUC2))
 
   params <- list('statistics' = sdt.stat, 'boxes1' = box.plot1, 'boxes2' = box.plot2, 'Density1' = dens1, 'Density2' = dens2, 'ROC' = roc.curve,
-                 'AUC' = AUC, 'AUC2' = AUC2, 'Group1' = dat, 'Group2' = dat2)
+                 'AUC1' = AUC, 'AUC2' = AUC2, 'Group1' = dat, 'Group2' = dat2)
 
   return(params)
 

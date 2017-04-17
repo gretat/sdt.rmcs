@@ -118,7 +118,7 @@ rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = 
 
   print(paste("The average d Prime (d') score for this example is: ",
               round(avg.dprime, digits = 2), "(SD=",
-              round(sd.dprime, digits = 2),") and the Criterion (c) is at: ",
+              round(sd.dprime, digits = 2),") and the average Criterion (c) is at: ",
               round(avg.bias, digits = 2), " (SD=",
               round(sd.bias, digits = 2), ")."))
 
@@ -152,7 +152,7 @@ rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = 
   graphics::plot(sequence, dHR, type = "l", col = 'salmon', axes = F, xlab = "x",
                  ylab = "Normal probability density function", ylim = c(0, .5), lwd = 2) # HR distribution
   graphics::abline(v = avg.bias, lty = 3, lwd = 3) # dotted line for criterion
-  graphics::legend("topright", legend = c("Noise", "Signal+Noise", 'Criterion'), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
+  graphics::legend("topright", legend = c("Noise", "Signal", 'Criterion'), fill = c('turquoise3', 'salmon', 'black'), lty = c(1,1,3))
   graphics::par(new = F)
 
   dens <- grDevices::recordPlot()
