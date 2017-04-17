@@ -13,8 +13,7 @@ Imports:
     tidyr, 
     stats, 
     graphics, 
-    grDevices,
-    tibble
+    grDevices
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
