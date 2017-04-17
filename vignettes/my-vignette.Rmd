@@ -102,7 +102,7 @@ The function will produce verbatim output that gives a small summary of the calc
 
 
 
-```{r, fig.show='hide', fig.width=7, fig.height=5}
+```{r, fig.show='hide', fig.width=9, fig.height=5}
 
 my.analysis <- rate.statistics(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, x = mydata, rm.intermid = FALSE)
 ```
@@ -133,7 +133,7 @@ It produces density plots for the signal and noise distributions where the signa
 
 
 
-```{r, fig.show='asis', fig.width=6, fig.height=5}
+```{r, fig.show='asis', fig.width=7, fig.height=5}
 my.analysis$Density
 ```
 
@@ -143,7 +143,7 @@ It additionally produces an ROC curve based on the mean d' and its SD. It also s
 
 
 
-```{r, fig.show='asis', fig.width=6, fig.height=5}
+```{r, fig.show='asis', fig.width=7, fig.height=5}
 my.analysis$ROC
 ```
 
@@ -226,7 +226,7 @@ The function will produce verbatim output that gives a small summary of the calc
 
 
 
-```{r, fig.show='hide', fig.width=7, fig.height=5}
+```{r, fig.show='hide', fig.width=9, fig.height=5}
 
 my.analysis2 <- rate.statistics2(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, 
                                  hits2 = hits2, miss2 = miss2,
@@ -260,7 +260,7 @@ It produces 2 separate density plots for each group for the signal and noise dis
 
 
 
-```{r, fig.show='asis', fig.width=6, fig.height=5}
+```{r, fig.show='asis', fig.width=7, fig.height=5}
 
 my.analysis2$Density1
 my.analysis2$Density2
@@ -272,7 +272,7 @@ It additionally produces an ROC plot, which includes the ROC curves and the crit
 
 
 
-```{r, fig.show='asis', fig.width=6, fig.height=5}
+```{r, fig.show='asis', fig.width=7, fig.height=5}
 my.analysis2$ROC
 ```
 
