@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "sdt.rmcs walkthrough"
+author: "Greta Todorova"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -51,7 +51,7 @@ library(sdt.rmcs)
 ```
 
 
-##Example analysis for one group 
+## Example analysis for one group 
 
 
 
@@ -60,7 +60,7 @@ run the analysis using **rate.statistics2** without any input or use your own da
 
 
 
-###The Data
+### The Data
 
 
 
@@ -77,7 +77,7 @@ head(mydata, 5)
 
 
 
-###The main function
+### The main function
 
 
 These headings of the data frame produced from **sdt.data** match the requirements of **rate.statistics**. Thus they do not need to be input-ed explicitly. Only the name of the data set is required. However if using own data, the column names need to be specified.
@@ -174,7 +174,7 @@ head(my.analysis$data, 5)
 
 
 
-##Example analysis for two groups 
+## Example analysis for two groups 
 
 
 
@@ -182,7 +182,7 @@ The analysis is essentially the same, however it provides the calculations for 2
 
 
 
-###The Data
+### The Data
 
 
 
@@ -201,7 +201,7 @@ head(mydata2, 5)
 
 
 
-###The main function
+### The main function
 
 
 
@@ -298,14 +298,14 @@ my.analysis2$AUC2
 
 Finally the newly created data sets with all the calculations are saved in two different objects. As the intermediate columns were not removed, those are also saved. The names are fa.rate1 and hit.rate1 and hit.rate3 and fa.rate3 for group 1 and group 2. respectively. Their names are also printed when the rate.statistics is ran. These data sets can then be used for further analysis, which should be done after evaluation of the box plots. 
 
-####Group 1
+#### Group 1
 
 ```{r}
 head(my.analysis2$Group1, 5)
 ```
 
 
-####Group 2
+#### Group 2
 ```{r}
 head(my.analysis2$Group1, 5)
 ```
@@ -313,7 +313,7 @@ head(my.analysis2$Group1, 5)
 
 
 
-##References
+## References
 
 
 Hautus, M. J. (1995). Corrections for extreme proportions and their biasing effects on estimated values of d′. *Behavior Research Methods, 27*(1), 46-51.
