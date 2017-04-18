@@ -41,4 +41,6 @@ density functions. Those will have an effect on the ROC curve and might have an 
 
 ### Reference
 <sup>1</sup> Macmillan, N. A., & Creelman, C. D. (2004). Detection theory: A user's guide. Psychology press.
+
+
 <sup>2</sup> Wickens, T. D. (2002). *Elementary signal detection theory*. Oxford University Press, USA.
