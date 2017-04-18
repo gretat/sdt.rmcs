@@ -34,6 +34,12 @@ devtools::install_github("gretat/sdt.rmcs")
 * Perform SDT analysis for one group **rate.statistics**
 * Perform SDT analysis for two groups **rate.statistics2**
 
+
+Read the vignette for step-by-step instructions
+``` r
+vignette(sdt.rmcs)
+```
+
 #### NOTE
 It is important to note that small or big SD for the d'Prime will have an effect on the signal distribution, which will be seen in the 
 density functions. Those will have an effect on the ROC curve and might have an effect  on the AUC calculation. If too big violations are observed either from the numbers themselves or in the density plots, tthe calculations returned by these function of the AUC should be reviewed and possible alternatives considered.
