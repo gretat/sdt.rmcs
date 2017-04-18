@@ -1,0 +1,325 @@
+---
+title: "sdt.rmcs walkthrough"
+author: "Greta Todorova"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Signal Detection one line analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+This package, allows running a basic signal detection analysis for one or 2 groups. 
+
+
+It calculates the **d\'** and **bias** for each individual person and a mean **d\'** and **bias** with standard deviations (Macmillan, & Creelman, 2004)). 
+There are several plots that are produced from the output.
+
+
+The first one is box plots that show the distribution of **d'** and **bias (c)**. 
+
+
+Secondly it plots the signal and noise density distributions with a line representing the criterion. The signal distribution is based on 
+the mean **d\'** and its standard deviation. The noise distribution, on the other hand, has a mean of 0 and SD=1 as suggested by
+*Thomas Wickens* (2002) (the noise distribution is assumed to have a normal distributions in comparison to the Signal + Noise one).
+
+
+Receiver Operating Characteristic (ROC) curves are also displayed and the area under the curve (AUC) is calculated.
+ROC is plotted based on mean **d'** and a **criterion** dot based on the mean **bias** is placed on the curve.
+
+
+## Functions
+
+
+
+* Simulate data for one group (1000 participants) **sdt.data**
+* Simulate data for two groups (1000 participants) **sdt.data2**
+* Perform SDT analysis for one group **rate.statistics**
+* Perform SDT analysis for two groups **rate.statistics2**
+
+
+#### Download and load the package
+
+
+
+```{r, message=FALSE}
+devtools::install_github('gretat/sdt.rmcs')
+library(sdt.rmcs)
+
+```
+
+
+## Example analysis for one group 
+
+
+
+To run the analysis for two groups there are a few options that can be used. Either simulate data with **sdt.data2**, by giving it desired parameters (optional); 
+run the analysis using **rate.statistics2** without any input or use your own data set. 
+
+
+
+### The Data
+
+
+
+The following example is going to use simulated data with specified parameters for **sdt.data**. This simulated experiment has 30 targets, 50 non-targets, 
+participants had minimum chance level performance - thus the minimum proportion of hits is 0.5, and they were very good at correctly rejecting the non-targets and had a minimal correct rejection proportion of 0.8. The function will generate a 1000 participants with a random distribution of hits and correct rejections between the minimum proportions specified and the totals provided. From those it will calculate the false alarms and misses and it will provide a table with the headings shown bellow.
+
+
+
+```{r}
+
+mydata <- sdt.data(tot.signal = 30, tot.lure = 50, min.hits = 0.5, min.cr = 0.8)
+head(mydata, 5)
+```
+
+
+
+### The main function
+
+
+These headings of the data frame produced from **sdt.data** match the requirements of **rate.statistics**. Thus they do not need to be input-ed explicitly. Only the name of the data set is required. However if using own data, the column names need to be specified.
+
+
+
+
+**rate.statistics** does a number of calculations and produces a list of outputs. It calculates the hit rate, false alarm rate, miss rate and correct rejection rate, from the provided data set. Additionally, it recalculates the Hit rate and False Alarm rate that are equal to 1 or 0 and two new columns are added as a result. This is done because the calculation of d' and c do not allow for 100% or 0% hit or false alarm rates. Further on this can be found in the 1995 paper by Michael Hautus. Additionally, the function creates a new data set which contains the old data-set and the newly added columns.
+
+
+I will show each output separately.  Even though the function asks for the same column names that are given from the data simulation function above, the whole function will be written out for illustrative purposes. Otherwise the function can be written out as follows:
+
+
+**rate.statistics(x=mydata)** 
+
+
+An additional argument to the function is *rm.intermid*. It is a boolean argument that deals with the intermediate columns created by the recalculation of Hit and False Alarm rates. These can be left in the created data set by setting it to FALSE.
+
+
+
+The function will produce verbatim output that gives a small summary of the calculations that were done. All of the information can be extracted from the output using *data$value*.
+
+
+
+```{r, fig.show='hide', fig.width=9, fig.height=5}
+my.analysis <- rate.statistics(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, x = mydata, rm.intermid = FALSE)
+```
+
+
+
+Firstly it creates a small data frame that holds the d' and bias means and standard deviations
+
+
+
+```{r}
+my.analysis$statistics
+```
+
+
+
+It also produces box plots to graphically represent the distributions of **d\'** and **bias**.
+
+
+
+```{r, fig.show='asis', fig.width=6, fig.height=5}
+my.analysis$boxes
+```
+
+
+
+It produces density plots for the signal and noise distributions where the signal distribution is based on the mean **d\'** and its standard deviation. And the doted line represents the mean **criterion** (bias). 
+
+
+
+```{r, fig.show='asis', fig.width=9, fig.height=5}
+my.analysis$Density
+```
+
+
+
+It additionally produces an ROC curve based on the mean d' and its SD. It also shows the mean criterion (bias) represented as a dot on the line. 
+
+
+
+```{r, fig.show='asis', fig.width=7, fig.height=5}
+my.analysis$ROC
+```
+
+
+
+Based on the normal distributions used to create the ROC curve, the area under the curve is calculated. 
+
+
+#### NOTE
+It is important to note that small or big SD for the d'Prime will have an effect on the signal distribution, which will be seen in the 
+density functions. Those will have an effect on the ROC curve and might have an effect  on the AUC calculation. If too big violations are 
+observed either from the numbers themselves or in the density plots, the calculations of the AUC should be 
+reviewed and possible alternatives considered.
+
+
+
+```{r}
+my.analysis$AUC
+```
+
+
+
+Finally the newly created data set with all the calculations is saved. As the intermediate columns were not removed, those are also saved. The names are fa.rate1 and hit.rate1. Their names are also printer when the rate.statistics is ran. This data set can then be used for further analysis, which should be done after evaluation of the box plots. 
+
+
+```{r}
+head(my.analysis$data, 5)
+```
+
+
+
+## Example analysis for two groups 
+
+
+
+The analysis is essentially the same, however it provides the calculations for 2 groups.
+
+
+
+### The Data
+
+
+
+The following example is going to use simulated data with specified parameters for **sdt.data2**. This simulated experiment has 80 targets, 80 non-targets, 
+participants in group 1 had a very good performance - thus the minimum proportion of hits is 0.8, and they were very good at correctly rejecting the non targets and had a minimal correct rejection proportion of 0.85. The second group had a very poor performance - thus the minimum proportion of hits is 0.2, and they were also very poor at detecting the non-targets thus a minimum correct rejection proportion was given as 0.4. The function will generate a 1000 participants with a random distribution of hits and correct rejections between the minimum proportions specified and the totals provided for both groups. From those it will calculate the false alarms and misses and it will provide a table with the headings shown bellow. The number 2 shows that these are the results for group 2.
+
+
+
+```{r}
+
+mydata2 <- sdt.data2(tot.signal = 80, tot.lure = 80,
+           min.hits = 0.8, min.cr = 0.85,
+           min.hits2 = 0.2, min.cr2 = 0.4)
+head(mydata2, 5)
+```
+
+
+
+### The main function
+
+
+
+These headings of the data frame produced from **sdt.data2** match the requirements of **rate.statistics2**. Thus they do not need to be input-ed explicitly. Only the name of the data set is required. 
+
+
+**rate.statistics2** does the same calculations as the ones done for one group. It calculates  the hit rate, false alarm rate, miss rate and correct rejection rate, from the provided data set for each group. Additionally it recalculates the Hit rate and False Alarm rate that are equal to 1 or 0 and two new columns are added as a result again for each group. Additionally, the function creates two new data sets which contain the old data-set and the newly added columns.
+
+
+I will show each output separately.  Even thought the function asks for the same column names that are given from the data simulation function above, the whole function will be written out for illustrative purposes. Otherwise the function can be written out as follows:
+
+
+**rate.statistics2(x=mydata2)** 
+
+
+An additional argument to the function is *rm.intermid*. It is a boolean argument that deals with the intermediate columns created by the recalculation of Hit and False Alarm rates. These can be left in the created data set by setting it to FALSE.
+
+
+
+The function will produce verbatim output that gives a small summary of the calculations that were done. All of the information can be extracted from the output using *data$value*.
+
+
+
+```{r, fig.show='hide', fig.width=9, fig.height=5}
+
+my.analysis2 <- rate.statistics2(hits = hits, miss = miss, CorRej = CorRej, falarm = falarm, 
+                                 hits2 = hits2, miss2 = miss2,
+                                 CorRej2 = CorRej2, falarm2 = falarm2, x = mydata2, rm.intermid = FALSE)
+```
+
+
+
+Firstly it creates a small data frame that holds the d' and bias means and standard deviations for both groups. The statistics for group 2 are annotated with a 2 at the end. 
+
+
+
+```{r}
+my.analysis2$statistics
+```
+
+
+
+It also produces box plots to graphically represent the distributions of **d\'** and **bias**.
+
+
+
+```{r, fig.show='asis', fig.width=6, fig.height=5}
+my.analysis2$boxes1
+my.analysis2$boxes2
+```
+
+
+
+It produces 2 separate density plots for each group for the signal and noise distributions where the signal distribution is based on the mean **d\'** and its standard deviation. The doted lines represent the mean **criterion** (bias).  As you can see there is very little overlap between signal and noise for the first group. Also the signal+noise distribution is very narrow due to a small SD. On the other hand the signal distribution of group 2 has almost the same shape to that of the noise distribution and that there is a lot of overlap suggesting that they were not that good at discriminating between the target and non-target. 
+
+
+
+```{r, fig.show='asis', fig.width=9, fig.height=5}
+
+my.analysis2$Density1
+my.analysis2$Density2
+```
+
+
+
+It additionally produces an ROC plot, which includes the ROC curves and the criterion for each group. With a very high success rate it can be seen that group 1's curve is very near the (0,1) coordinates, whereas the one for group 2 is bellow it. The curves are plotted based on the mean d' and its SD for each group.
+
+
+
+```{r, fig.show='asis', fig.width=9, fig.height=5}
+my.analysis2$ROC
+```
+
+
+
+Based on the normal distributions creates to crest the ROC curve, the areas under the curves (AUC) are calculated. 
+
+
+
+
+#### NOTE
+It is important to note that small or big SD for the d'Prime will have an effect on the signal distribution, which will be seen in the 
+density functions. Those will have an effect on the ROC curve and might have an effect  on the AUC calculation. If too big violations are 
+observed either from the numbers themselves or in the density plots, the calculations of the AUC should be 
+reviewed and possible alternatives considered.
+
+
+
+```{r}
+my.analysis2$AUC
+my.analysis2$AUC2
+```
+
+
+Finally the newly created data sets with all the calculations are saved in two different objects. As the intermediate columns were not removed, those are also saved. The names are fa.rate1 and hit.rate1 and hit.rate3 and fa.rate3 for group 1 and group 2. respectively. Their names are also printed when the rate.statistics is ran. These data sets can then be used for further analysis, which should be done after evaluation of the box plots. 
+
+#### Group 1
+
+```{r}
+head(my.analysis2$Group1, 5)
+```
+
+
+#### Group 2
+```{r}
+head(my.analysis2$Group1, 5)
+```
+
+
+
+
+## References
+
+
+Hautus, M. J. (1995). Corrections for extreme proportions and their biasing effects on estimated values of d′. *Behavior Research Methods, 27*(1), 46-51.
+
+
+Macmillan, N. A., & Creelman, C. D. (2004). *Detection theory: A user's guide*. Psychology press.
+
+
+Wickens, T. D. (2002). *Elementary signal detection theory*. Oxford University Press, USA.
