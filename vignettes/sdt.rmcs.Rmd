@@ -14,7 +14,7 @@ vignette: >
 This package, allows running a basic signal detection analysis for one or 2 groups. 
 
 
-It calculates the **d\'** and **bias** for each individual person and a mean **d\'** and **bias** with standard deviations. 
+It calculates the **d\'** and **bias** for each individual person and a mean **d\'** and **bias** with standard deviations (Macmillan, & Creelman, 2004)). 
 There are several plots that are produced from the output.
 
 
@@ -317,6 +317,9 @@ head(my.analysis2$Group1, 5)
 
 
 Hautus, M. J. (1995). Corrections for extreme proportions and their biasing effects on estimated values of d′. *Behavior Research Methods, 27*(1), 46-51.
+
+
+Macmillan, N. A., & Creelman, C. D. (2004). *Detection theory: A user's guide*. Psychology press.
 
 
 Wickens, T. D. (2002). *Elementary signal detection theory*. Oxford University Press, USA.
