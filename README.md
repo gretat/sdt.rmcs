@@ -37,7 +37,7 @@ devtools::install_github("gretat/sdt.rmcs")
 
 Read the vignette for step-by-step instructions
 ``` r
-vignette(sdt.rmcs)
+vignette('sdt.rmcs')
 ```
 
 #### NOTE
