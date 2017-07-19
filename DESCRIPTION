@@ -2,7 +2,7 @@ Package: sdt.rmcs
 Type: Package
 Title: One line signal detection analysis
 Version: 0.1.0
-Date: 2017
+Date: 2017-04-18
 Authors@R: person("Greta", "Todorova", email = "2028282t@student.gla.ac.uk", role = c("aut", "cre"))
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
@@ -17,7 +17,7 @@ Imports:
     grDevices
 License: What license is it under?
 Encoding: UTF-8
-LazyData: true
+LazyData: TRUE
 RoxygenNote: 6.0.1
 URL: https://github.com/gretat/sdt.rmcs
 BugReports: https://github.com/gretat/sdt.rmcs/issues
