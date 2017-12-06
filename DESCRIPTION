@@ -15,7 +15,7 @@ Imports:
     stats, 
     graphics, 
     grDevices
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: TRUE
 RoxygenNote: 6.0.1
