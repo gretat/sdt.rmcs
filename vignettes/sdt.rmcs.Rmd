@@ -55,8 +55,8 @@ library(sdt.rmcs)
 
 
 
-To run the analysis for two groups there are a few options that can be used. Either simulate data with **sdt.data2**, by giving it desired parameters (optional); 
-run the analysis using **rate.statistics2** without any input or use your own data set. 
+To run the analysis for one group there are a few options that can be used. Either simulate data with **sdt.data**, by giving it desired parameters (optional); 
+run the analysis using **rate.statistics** without any input or use your own data set. 
 
 
 
