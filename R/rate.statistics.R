@@ -40,8 +40,8 @@
 #'     result <- rate.statistics(x=data,rm.intermid = TRUE)
 #'     result$ROC
 #'\dontrun{
-#'     rate.statistics(hits = HIT, miss = Miss, CorRej = CR,
-#'                 falarm = FA, sdt = my.dataset, rm.intermid = FALSE)
+#'     rate.statistics(hits = 'HIT', miss = 'Miss', CorRej = 'CR',
+#'                 falarm = 'FA', x = my.dataset, rm.intermid = FALSE)
 #'}
 
 
@@ -55,7 +55,7 @@ rate.statistics <- function(hits = hits, miss = miss, CorRej = CorRej, falarm = 
     x = x
   }
 
-  dat <- data.frame(tot.hits = x$hits, tot.miss = x$miss, tot.fa = x$falarm, tot.corRej = x$corRej)
+  dat <- data.frame(tot.hits = x[[hits]], tot.miss = x[[miss]], tot.fa = x[[falarm]], tot.corRej = x[[CorRej]])
 
   dat <- dplyr::mutate(dat, hit.rate1 = (tot.hits / (tot.hits + tot.miss)))
   dat <- dplyr::mutate(dat, fa.rate1 = (tot.fa / (tot.fa + tot.corRej)))

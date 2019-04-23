@@ -49,9 +49,9 @@
 #'     result <- rate.statistics2(x = data, rm.intermid = FALSE)
 #'     result$Density2
 #'\dontrun{
-#'     rate.statistics2(hits = HIT, miss = Miss, CorRej = CR,
-#'                  falarm = FA, hits2 = HIT2, miss2 = Miss2, CorRej2 = CR2,
-#'                  falarm2 = FA2, x = sdt2, rm.intermid = TRUE)
+#'     rate.statistics2(hits = 'HIT', miss = 'Miss', CorRej = 'CR',
+#'                  falarm = 'FA', hits2 = 'HIT2', miss2 = 'Miss2', CorRej2 = 'CR2',
+#'                  falarm2 = 'FA2', x = sdt2, rm.intermid = TRUE)
 #'                  }
 
 
@@ -65,8 +65,8 @@ rate.statistics2 <- function(hits = hits, miss = miss, CorRej = CorRej, falarm =
     x = x
   }
 
-  dat <- data.frame(tot.hits = x$hits, tot.miss = x$miss, tot.fa = x$falarm, tot.corRej = x$corRej)
-  dat2 <- data.frame(tot.hits2 = x$hits2, tot.miss2 = x$miss2, tot.fa2 = x$falarm2, tot.corRej2 = x$corRej2)
+  dat <- data.frame(tot.hits = x[[hits]], tot.miss = x[[miss]], tot.fa = x[[falarm]], tot.corRej = x[[corRej]])
+  dat2 <- data.frame(tot.hits2 = x[[hits2]], tot.miss2 = x[[miss2]], tot.fa2 = x[[falarm2]], tot.corRej2 = x[[corRej2]])
 
   dat <- dplyr::mutate(dat, hit.rate1 = (tot.hits / (tot.hits + tot.miss)))
   dat <- dplyr::mutate(dat, fa.rate1 = (tot.fa / (tot.fa + tot.corRej)))
